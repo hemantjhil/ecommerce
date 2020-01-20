@@ -1,6 +1,7 @@
 package com.example.ecom.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.util.Map;
 @Document(collection = "Product")
 public class Product implements Serializable {
     public static final String TABLE_NAME="Product";
+    @Id
     private String productId;
     private String productName;
     private String productDescription;

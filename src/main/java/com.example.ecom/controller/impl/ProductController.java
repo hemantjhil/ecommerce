@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 @RestController
-
+@RequestMapping("/product")
 public class ProductController {
     //private static final ConfigurationUtils BeanUtils = ;
     //    @GetMapping("/view")
@@ -53,12 +53,16 @@ public class ProductController {
         Product product1=productServices.viewProducById(id);
         return new ResponseEntity<Product>(product1,HttpStatus.CREATED);
     }
-    @GetMapping("product/viewAllProduct")
+    @GetMapping("/viewAllProduct")
     public ResponseEntity<String> getAllProducts()
     {
         List<Product> products=productServices.getAllProducts();
         return new ResponseEntity(products,HttpStatus.CREATED);
     }
+//    @GetMapping("/product/view/{categoryId}")
+//    public ResponseEntity<List<String>> viewProduct(String categoryId){
+//
+//    }
     @GetMapping("product/viewMerchants/{productId}")
     public Double viewMerchantByProductId(@PathVariable("productId") String productId)
     {
