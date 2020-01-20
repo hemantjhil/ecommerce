@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "merchant", url = "http//172.16.20.113:8081")
+@FeignClient(name = "merchant", url = "http://172.16.20.113:8081")
 public interface ProductProxy {
 
     @GetMapping("/merchant/{productId}")

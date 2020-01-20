@@ -7,10 +7,9 @@ import com.example.ecom.repository.ProductRepository;
 import com.example.ecom.services.ProductServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,9 +53,9 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     @Override
-    public List<Integer> viewMerchants(String productId) {
+    public Double viewMerchantByProductId(String productId) {
         List<MerchantProductDTO> merchantByProductId = productProxy.viewMerchantByProductId(productId).stream().collect(Collectors.toList());
-        List<Integer> stockByProductId = merchantByProductId.stream().map(MerchantProductDTO::getStock).collect(Collectors.toList());
-        return stockByProductId;
+        List<Double> priceByProductId = merchantByProductId.stream().map(MerchantProductDTO::getPrice).collect(Collectors.toList());
+        return Collections.min(priceByProductId);
     }
 }

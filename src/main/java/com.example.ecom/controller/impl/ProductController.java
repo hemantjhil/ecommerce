@@ -60,9 +60,9 @@ public class ProductController {
         return new ResponseEntity(products,HttpStatus.CREATED);
     }
     @GetMapping("product/viewMerchants/{productId}")
-    public List<Integer> viewMerchants(@PathVariable("productId") String productId)
+    public Double viewMerchantByProductId(@PathVariable("productId") String productId)
     {
-        return productServices.viewMerchants(productId);
+        return productServices.viewMerchantByProductId(productId);
     }
 
 }
