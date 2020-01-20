@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0aa2791-12d0-4f73-a9db-9312c7f8fb54" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ecom" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ecom" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="e0aa2791-12d0-4f73-a9db-9312c7f8fb54" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +19,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/dto/CategoryDTO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/dto/ProductDTO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/services/impl/ProductServicesImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="347">
-              <caret line="49" column="5" lean-forward="true" selection-start-line="44" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
+              <caret line="49" column="5" selection-start-line="44" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
               <folding>
                 <element signature="e#1049#1050#0" expanded="true" />
                 <element signature="e#1076#1077#0" expanded="true" />
@@ -125,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/controller/CategoryController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="384">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -755,7 +752,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/services/impl/ProductServicesImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
-          <caret line="49" column="5" lean-forward="true" selection-start-line="44" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
+          <caret line="49" column="5" selection-start-line="44" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
           <folding>
             <element signature="e#1049#1050#0" expanded="true" />
             <element signature="e#1076#1077#0" expanded="true" />
@@ -803,7 +800,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/dto/ProductDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -813,7 +810,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/controller/CategoryController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -823,7 +820,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/ecom/dto/CategoryDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
