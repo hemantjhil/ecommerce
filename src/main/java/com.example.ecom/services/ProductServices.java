@@ -12,4 +12,5 @@ public interface ProductServices  {
     List<Product> viewProductsByCategoryId(String categoryId);
     Product viewProducById(String id);
     List<Product> getAllProducts();
+    Double viewMerchantByProductId(String productId);
 }

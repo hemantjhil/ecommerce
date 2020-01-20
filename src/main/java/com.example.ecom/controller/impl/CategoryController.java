@@ -1,4 +1,4 @@
-package com.example.ecom.controller;
+package com.example.ecom.controller.impl;
 
 
 import com.example.ecom.dto.CategoryDTO;

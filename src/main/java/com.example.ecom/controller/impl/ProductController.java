@@ -2,6 +2,7 @@ package com.example.ecom.controller;
 
 
 
+import com.example.ecom.dto.MerchantProductDTO;
 import com.example.ecom.dto.ProductDTO;
 import com.example.ecom.entity.Product;
 import com.example.ecom.services.ProductServices;
@@ -58,8 +59,10 @@ public class ProductController {
         List<Product> products=productServices.getAllProducts();
         return new ResponseEntity(products,HttpStatus.CREATED);
     }
-    @GetMapping("/product/view/{categoryId}")
-    public ResponseEntity<List<String>> viewProduct(String categoryId){
-
+    @GetMapping("product/viewMerchants/{productId}")
+    public Double viewMerchantByProductId(@PathVariable("productId") String productId)
+    {
+        return productServices.viewMerchantByProductId(productId);
     }
+
 }

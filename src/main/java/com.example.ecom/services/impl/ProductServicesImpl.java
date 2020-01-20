@@ -1,14 +1,15 @@
 package com.example.ecom.services.impl;
 
+import com.example.ecom.controller.ProductProxy;
+import com.example.ecom.dto.MerchantProductDTO;
 import com.example.ecom.entity.Product;
 import com.example.ecom.repository.ProductRepository;
 import com.example.ecom.services.ProductServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,8 @@ public class ProductServicesImpl implements ProductServices {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    ProductProxy productProxy;
     @Override
     public Product save(Product product){
         return productRepository.insert(product);
@@ -47,5 +50,12 @@ public class ProductServicesImpl implements ProductServices {
         List<Product> products = productRepository.findAll();
         if(null!=products) return products;
         return new ArrayList<>();
+    }
+
+    @Override
+    public Double viewMerchantByProductId(String productId) {
+        List<MerchantProductDTO> merchantByProductId = productProxy.viewMerchantByProductId(productId).stream().collect(Collectors.toList());
+        List<Double> priceByProductId = merchantByProductId.stream().map(MerchantProductDTO::getPrice).collect(Collectors.toList());
+        return Collections.min(priceByProductId);
     }
 }
