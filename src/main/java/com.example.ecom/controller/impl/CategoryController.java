@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoryController {
     @Autowired
     CategoryServices categoryServices;
@@ -21,9 +22,9 @@ public class CategoryController {
     @PostMapping(value = "/addCategory")
     public ResponseEntity<String> addOrUpdateCategory(@RequestBody CategoryDTO categoryDTO){
         Category category =new Category();
-        BeanUtils.copyProperties(categoryDTO, category);
+        //BeanUtils.copyProperties(categoryDTO, category);
         Category categoryCreated=categoryServices.save(category);
-        return new ResponseEntity<String>(categoryCreated.getCategoryId(),HttpStatus.CREATED);
+        return new ResponseEntity<>(categoryCreated.getCategoryId(), HttpStatus.CREATED);
     }
     @GetMapping("category/getAllCategoriesName")
     public ResponseEntity<List<String>> getAllCategoryName(){

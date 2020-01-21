@@ -2,6 +2,8 @@ package com.example.ecom.services.impl;
 
 import com.example.ecom.controller.ProductProxy;
 import com.example.ecom.dto.MerchantProductDTO;
+import com.example.ecom.dto.ProductDTO;
+import com.example.ecom.dto.ProductsDTO;
 import com.example.ecom.entity.Product;
 import com.example.ecom.repository.ProductRepository;
 import com.example.ecom.services.ProductServices;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +42,7 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     @Override
-    public Product viewProducById(String id){
+    public Product viewProductById(String id){
         Product product=productRepository.findByProductId(id);
         if(null!=product) return product;
         return new Product();
@@ -53,9 +56,22 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     @Override
-    public Double viewMerchantByProductId(String productId) {
-        List<MerchantProductDTO> merchantByProductId = productProxy.viewMerchantByProductId(productId).stream().collect(Collectors.toList());
-        List<Double> priceByProductId = merchantByProductId.stream().map(MerchantProductDTO::getPrice).collect(Collectors.toList());
-        return Collections.min(priceByProductId);
+    public MerchantProductDTO viewMerchantByProductId(String productId) {
+        List<MerchantProductDTO> merchantProductDTO = productProxy.viewMerchantByProductId(productId).stream().collect(Collectors.toList());
+        MerchantProductDTO merchantProductDTO2=new MerchantProductDTO();
+        Double pricemin=100000000.0;
+        for(MerchantProductDTO merchantProductDTO1:merchantProductDTO){
+            Double price=merchantProductDTO1.getPrice();
+            if(price<pricemin){
+                merchantProductDTO2=merchantProductDTO1;
+            }
+        }
+//        Integer stockmin=merchantProductDTO2.getStock();
+//        String merchantIdmin=merchantProductDTO2.getMerchantId();
+//
+        return merchantProductDTO2;
+
+
     }
+
 }

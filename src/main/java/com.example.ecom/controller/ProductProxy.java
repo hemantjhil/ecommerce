@@ -1,5 +1,6 @@
 package com.example.ecom.controller;
 
+import com.example.ecom.dto.MerchantListingDTO;
 import com.example.ecom.dto.MerchantProductDTO;
 import com.example.ecom.services.CategoryServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import java.util.List;
 public interface ProductProxy {
 
     @GetMapping("/merchant/{productId}")
-    public List<MerchantProductDTO> viewMerchantByProductId(@PathVariable("productId") String productId);
+    List<MerchantProductDTO> viewMerchantByProductId(@PathVariable("productId") String productId);
+
+    @GetMapping("/viewProductIdByMerchantId/{merchantId}")
+    List<String> viewProduct(@PathVariable("merchantId") String merchantId);
 
 }
