@@ -7,6 +7,7 @@ import com.example.ecom.dto.ProductsDTO;
 import com.example.ecom.entity.Product;
 import com.example.ecom.repository.ProductRepository;
 import com.example.ecom.services.ProductServices;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,5 +79,20 @@ public class ProductServicesImpl implements ProductServices {
 //    {
 //        List<MerchantProductDTO>
 //    }
+    @Override
+    public List<ProductDTO> rank(List<ProductDTO> productDTOS)
+    {
+        List<ProductDTO> productDTOS1=new ArrayList<>();
+        for (ProductDTO p : productDTOS) {
+            ProductDTO productDto = new ProductDTO();
+            double value = p.getProductRating() / p.getPrice();
+            BeanUtils.copyProperties(p, productDto);
+            productDto.setWeighted(value);
+            productDTOS1.add(productDto);
+        }
+        Collections.sort(productDTOS1);
+        Collections.reverse(productDTOS1);
+        return productDTOS1;
+    }
 
 }

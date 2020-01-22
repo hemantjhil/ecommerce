@@ -52,7 +52,7 @@ public class ProductController {
             productDTOS.add(productDto);
 
         }
-
+        productServices.rank(productDTOS);
         return new ResponseEntity<List<ProductDTO>>(productDTOS, HttpStatus.CREATED);
     }
 
@@ -90,17 +90,8 @@ public class ProductController {
             productDTOS.add(productDto);
 
         }
-        List<ProductDTO> productDTOS1=new ArrayList<>();
-        for (ProductDTO p : productDTOS) {
-            ProductDTO productDto = new ProductDTO();
-            double value = p.getProductRating() / p.getPrice();
-            BeanUtils.copyProperties(p, productDto);
-            productDto.setWeighted(value);
-            productDTOS1.add(productDto);
-        }
-        //List<ProductDTO> productDTOList=
-        Collections.sort(productDTOS1);
-        Collections.reverse(productDTOS1);
+
+        List<ProductDTO> productDTOS1=productServices.rank(productDTOS);
         return new ResponseEntity<List<ProductDTO>>(productDTOS1, HttpStatus.CREATED);
     }
 
@@ -124,45 +115,49 @@ public class ProductController {
     @GetMapping("/productMerchant/{merchantId}")
     public ResponseEntity<List<ProductsDTO>> getProductWithStock(@PathVariable("merchantId") String merchantId )
     {
+        //List<String> id1=productServices.
         List<String> ids=productProxy.viewProduct(merchantId);
         List<ProductsDTO> listProductsDTO=new ArrayList<>();
-        for(Object id:ids){
+        for(String id:ids){
+            Product product=productServices.viewProductById(id);
             ProductsDTO productsDTO=new ProductsDTO();
+            BeanUtils.copyProperties(product,productsDTO);
             MerchantProductDTO merchantProductDTO=productServices.viewMerchantByProductId((String) id);
             productsDTO.setPrice(merchantProductDTO.getPrice());
             productsDTO.setStock(merchantProductDTO.getStock());
-            productsDTO.setProductName(productServices.viewProductById((String) id).getProductName());
-            productsDTO.setProductDescription(productServices.viewProductById((String) id).getProductDescription());
-            productsDTO.setProductAttribute(productServices.viewProductById((String) id).getProductAttribute());
-            productsDTO.setImageUrl(productServices.viewProductById((String)id).getImageUrl());
             listProductsDTO.add(productsDTO);
         }
         return new ResponseEntity<List<ProductsDTO>>(listProductsDTO,HttpStatus.CREATED);
     }
-    @GetMapping("/merchantListForProduct/{productId}")
-    public ResponseEntity<List<Product_DTO>> merchantListforProduct(@PathVariable("productId") String productId)
-    {
-        List<Product_DTO> product_dtos=new ArrayList<>();
-        List<MerchantProductDTO> merchantProductDTOS=productProxy.viewMerchantByProductId(productId);
-        BeanUtils.copyProperties(merchantProductDTOS,product_dtos);
-        for(MerchantProductDTO merchantProductDTO:merchantProductDTOS)
-        {
-            Product_DTO product_dto=new Product_DTO();
-            //BeanUtils.copyProperties(merchantProductDTO,product_dto);
-            product_dto.setCategoryId(productServices.viewProductById(merchantProductDTO.getProductId()).getCategoryId());
-            product_dto.setMerchantName(merchantProductDTO.getMerchantName());
-            product_dto.setStock(merchantProductDTO.getStock());
-            product_dto.setPrice(merchantProductDTO.getPrice());
-            product_dto.setMerchantId(merchantProductDTO.getMerchantId());
-            product_dto.setImageUrl(productServices.viewProductById(merchantProductDTO.getProductId()).getImageUrl());
-            product_dto.setProductAttribute(productServices.viewProductById(merchantProductDTO.getProductId()).getProductAttribute());
-            product_dto.setProductDescription(productServices.viewProductById(merchantProductDTO.getProductId()).getProductDescription());
-            product_dto.setProductName(productServices.viewProductById(merchantProductDTO.getProductId()).getProductName());
-            product_dto.setProductRating(productServices.viewProductById(merchantProductDTO.getProductId()).getProductRating());
-            product_dto.setProductUsp(productServices.viewProductById(merchantProductDTO.getProductId()).getProductUsp());
-            product_dto.setProductId(merchantProductDTO.getProductId());
-            product_dtos.add(product_dto);
-        }
-        return new ResponseEntity<List<Product_DTO>>(product_dtos,HttpStatus.CREATED);
-    }
+//    @GetMapping("/merchantListForProduct/{productId}")
+//    public ResponseEntity<List<Product_DTO>> merchantListforProduct(@PathVariable("productId") String productId)
+//    {
+//        List<Product_DTO> product_dtos=new ArrayList<>();
+//        List<MerchantProductDTO> merchantProductDTOS=productProxy.viewMerchantByProductId(productId);
+//        BeanUtils.copyProperties(merchantProductDTOS,product_dtos);
+//        for(MerchantProductDTO merchantProductDTO:merchantProductDTOS)
+//        {
+//            Product_DTO product_dto=new Product_DTO();
+//            //BeanUtils.copyProperties(merchantProductDTO,product_dto);
+//            product_dto.setCategoryId(productServices.viewProductById(merchantProductDTO.getProductId()).getCategoryId());
+//            product_dto.setMerchantName(merchantProductDTO.getMerchantName());
+//            product_dto.setStock(merchantProductDTO.getStock());
+//            product_dto.setPrice(merchantProductDTO.getPrice());
+//            product_dto.setMerchantId(merchantProductDTO.getMerchantId());
+//            product_dto.setImageUrl(productServices.viewProductById(merchantProductDTO.getProductId()).getImageUrl());
+//            product_dto.setProductAttribute(productServices.viewProductById(merchantProductDTO.getProductId()).getProductAttribute());
+//            product_dto.setProductDescription(productServices.viewProductById(merchantProductDTO.getProductId()).getProductDescription());
+//            product_dto.setProductName(productServices.viewProductById(merchantProductDTO.getProductId()).getProductName());
+//            product_dto.setProductRating(productServices.viewProductById(merchantProductDTO.getProductId()).getProductRating());
+//            product_dto.setProductUsp(productServices.viewProductById(merchantProductDTO.getProductId()).getProductUsp());
+//            product_dto.setProductId(merchantProductDTO.getProductId());
+//            product_dtos.add(product_dto);
+//        }
+//        return new ResponseEntity<List<Product_DTO>>(product_dtos,HttpStatus.CREATED);
+//    }
+    // productsDTO.setProductName(productServices.viewProductById((String) id).getProductName());
+//            productsDTO.setProductDescription(productServices.viewProductById((String) id).getProductDescription());
+//            productsDTO.setProductAttribute(productServices.viewProductById((String) id).getProductAttribute());
+//            productsDTO.setImageUrl(productServices.viewProductById((String)id).getImageUrl());
+
 }

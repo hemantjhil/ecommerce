@@ -10,10 +10,11 @@ import java.util.List;
 
 
 public interface ProductServices  {
-    public Product save(Product product);
+    Product save(Product product);
     Iterable<Product> findAllById(Iterable<String> iterable);
     List<Product> viewProductsByCategoryId(String categoryId);
     Product viewProductById(String id);
     List<Product> getAllProducts();
     MerchantProductDTO viewMerchantByProductId(String productId);
+    List<ProductDTO> rank(List<ProductDTO> productDTOS);
 }
