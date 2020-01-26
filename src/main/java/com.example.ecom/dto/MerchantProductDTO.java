@@ -11,11 +11,18 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchantProductDTO implements Serializable {
+public class MerchantProductDTO implements Serializable, Comparable<MerchantProductDTO> {
 
     private String merchantId;
     private String productId;
     private int stock;
     private double price;
     private String merchantName;
+
+    private Double weighted;
+
+    @Override
+    public int compareTo(MerchantProductDTO o) {
+        return (int) (weighted-o.getWeighted());
+    }
 }

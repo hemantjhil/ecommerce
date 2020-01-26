@@ -11,4 +11,5 @@ public interface CategoryServices  {
     Category save(Category category);
     List<String> getAllCategories();
     List<Category> getAllCategory();
+    String getCategoryName(String id);
 }

@@ -1,25 +1,24 @@
 package com.example.ecom.dto;
 
-
 import lombok.*;
 
 import java.util.Map;
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Data
+@AllArgsConstructor
 @Builder
-public class ProductsDTO {
-    private String productId;
+@NoArgsConstructor
+public class AddMerchant {
+
     private String productName;
     private String productDescription;
     private Map productAttribute;
+    private String productUsp;
     private String imageUrl;
-    private int stock;
+    private String categoryId;
     private Double price;
-
+    private int stock;
+    private String merchantId;
 }
-

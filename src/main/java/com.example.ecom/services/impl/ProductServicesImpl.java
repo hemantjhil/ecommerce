@@ -1,5 +1,6 @@
 package com.example.ecom.services.impl;
 
+import com.example.ecom.controller.CartProxy;
 import com.example.ecom.controller.ProductProxy;
 import com.example.ecom.dto.MerchantProductDTO;
 import com.example.ecom.dto.ProductDTO;
@@ -9,7 +10,10 @@ import com.example.ecom.repository.ProductRepository;
 import com.example.ecom.services.ProductServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,22 +59,38 @@ public class ProductServicesImpl implements ProductServices {
         if(null!=products) return products;
         return new ArrayList<>();
     }
-
+    @Autowired
+    CartProxy cartProxy;
+    @Autowired
+    ProductServices productServices;
     @Override
     public MerchantProductDTO viewMerchantByProductId(String productId) {
         List<MerchantProductDTO> merchantProductDTO = productProxy.viewMerchantByProductId(productId).stream().collect(Collectors.toList());
-        MerchantProductDTO merchantProductDTO2=new MerchantProductDTO();
-        Double pricemin=100000000.0;
-        for(MerchantProductDTO merchantProductDTO1:merchantProductDTO){
-            Double price=merchantProductDTO1.getPrice();
-            if(price<pricemin){
-                merchantProductDTO2=merchantProductDTO1;
-            }
+        List<MerchantProductDTO> merchantProductDTOS=new ArrayList<>();
+        for(MerchantProductDTO m:merchantProductDTO){
+            String id=m.getMerchantId();
+//            int numberOfProductsMerchantSold=productProxy.viewProductsByMerchantId(id).size();
+            int count= productProxy.viewProduct(m.getProductId()).size();
+            double rating=productProxy.getRatingByMerchantId(id);
+            int stock=productProxy.getStockByPidMid(id,m.getProductId());
+            double price=m.getPrice();
+            double productRating=productRepository.findByProductId(m.getProductId()).getProductRating();
+            //int soldItems= (int) cartProxy.viewProductCount(m.getProductId());
+            double weighted=count*rating*stock*productRating/price;
+            m.setWeighted(weighted);
+            merchantProductDTOS.add(m);
+        }
+        Collections.sort(merchantProductDTOS);
+        MerchantProductDTO merchantProductDTO1=merchantProductDTOS.get(0);
+        if(merchantProductDTO1!=null) {
+            return merchantProductDTO1;
+        }
+        else{
+            return new MerchantProductDTO();
         }
 //        Integer stockmin=merchantProductDTO2.getStock();
 //        String merchantIdmin=merchantProductDTO2.getMerchantId();
 //
-        return merchantProductDTO2;
 
 
     }
@@ -85,14 +105,30 @@ public class ProductServicesImpl implements ProductServices {
         List<ProductDTO> productDTOS1=new ArrayList<>();
         for (ProductDTO p : productDTOS) {
             ProductDTO productDto = new ProductDTO();
-            double value = p.getProductRating() / p.getPrice();
+            Double value=0.0;
+            if(p.getPrice()!=0) {
+                value = p.getProductRating() / p.getPrice();
+            }
+//            int soldItems= (int) cartProxy.viewProductCount(p.getProductId());
             BeanUtils.copyProperties(p, productDto);
             productDto.setWeighted(value);
             productDTOS1.add(productDto);
         }
         Collections.sort(productDTOS1);
-        Collections.reverse(productDTOS1);
         return productDTOS1;
     }
+
+//    public List<ProductDTO> addAll(List<ProductDTO> productDTOS){
+//        List<ProductDTO> productDTOS1=new ArrayList<>();
+//        for(ProductDTO p:productDTOS){
+//            int count= productProxy.viewProduct(p).size();
+//            //double rating=productProxy.getRatingByMerchantId(id);
+//            int stock=productProxy.getStockByPidMid(id,m.getProductId());
+//            double price=m.getPrice();
+//            double productRating=productRepository.findByProductId(m.getProductId()).getProductRating();
+//            int soldItems= (int) cartProxy.viewProductCount(m.getProductId());
+//            double weighted=count*rating*stock*productRating*soldItems/price;
+//        }
+//    }
 
 }

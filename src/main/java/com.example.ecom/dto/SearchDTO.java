@@ -1,7 +1,6 @@
 package com.example.ecom.dto;
 
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -13,8 +12,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class ProductDTO implements Serializable, Comparable<ProductDTO> {
-
+public class SearchDTO implements Serializable, Comparable<SearchDTO>{
     private String productId;
     private String productName;
     private String productDescription;
@@ -25,9 +23,11 @@ public class ProductDTO implements Serializable, Comparable<ProductDTO> {
     private String categoryName;
     private Double price;
     private Double weighted;
+    private String merchantId;
+
 
     @Override
-    public int compareTo(ProductDTO productDTO) {
-        return (int) (weighted-productDTO.getWeighted());
+    public int compareTo(SearchDTO searchDTO) {
+        return (int)(weighted-searchDTO.getWeighted());
     }
 }

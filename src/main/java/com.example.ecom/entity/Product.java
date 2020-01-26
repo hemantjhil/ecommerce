@@ -1,9 +1,11 @@
 package com.example.ecom.entity;
 
 import lombok.*;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.annotation.Generated;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -26,6 +28,6 @@ public class Product implements Serializable {
     private String productUsp;
     private String imageUrl;
     private String categoryId;
-
+    private double weighted;
 
 }
